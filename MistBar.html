@@ -1,0 +1,61 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double+Ink:wght@100..900&family=DM+Serif+Text&family=Dancing+Script:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Pixelify+Sans:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+</style>
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MistBar Pixel RPG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <div id="scene-area">
+            <div id="card-stage" class="hidden">
+                <div class="tarot-card" id="tarot-card">
+                    <div class="card-face card-front" id="card-front-display">
+                        <div class="card-inner-border">
+                        </div>
+                    </div>
+                    <div class="card-face card-back">
+                        <div id="drink-image-display" class="drink-art-box"></div>
+                        <h3 id="recipe-title">灵魂配方</h3>
+                        <div id="recipe-content"></div>
+                        <p class="tap-hint">[ Click to Flip ]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="search-overlay" class="hidden">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Type the keywords (i.e.Gin, Lemon)...">
+                <div class="search-btns">
+                    <button onclick="executeSearch()">[ Find ]</button>
+                    <button onclick="closeSearch()">[ Back ]</button>
+                </div>
+                <div id="search-results"></div>
+            </div>
+        </div>
+
+        <div id="dialogue-area">
+    <div class="dialogue-wrapper">
+        <div id="portrait-container">
+            <div id="portrait-img"></div>
+        </div>
+
+        <div id="dialogue-box">
+            <div id="dialogue-text">Welcome to the MistBar...</div>
+            <div id="options-overlay">
+                </div>
+        </div>
+    </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

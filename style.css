@@ -1,0 +1,400 @@
+/* --- 像素 RPG 复古变量 (基于 image_0.png 的色调) --- */
+:root {
+    --bg-dark: #000000;         /* 纯黑背景 */
+    --ui-bg: #141416;         /* 对话框和菜单的深色背景 */
+    --gold: #b28c3a;           /* 质朴的金棕色 */
+    --text-white: #e6e6e6;     /* 文本色 */
+    --card-bg: #212124;       /* 卡片的基础色 */
+    --purple-trim: #484c67;   /* 用于UI边框或强调的深紫色 */
+    --blue-neon: #4dabf7;
+    
+    /* 像素渲染基础 */
+    --pixel-rendering: pixelated; 
+    --pixel-font: 'Monospace', monospace; /* 替换为真正的像素字体以获得最佳效果 */
+}
+
+/* --- 通用像素设置 --- */
+body, html {
+    margin: 0; padding: 0; height: 100%;
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    font-family: "Pixelify Sans", sans-serif;
+    overflow: hidden;
+    
+    /* 强制所有图像和 UI 使用粗糙像素缩放 */
+    image-rendering: pixelated; 
+    image-rendering: crisp-edges;
+}
+
+/* 对话框文字 */
+#dialogue-box {
+    flex: 1;
+    position: relative;
+
+    color: var(--text-white);
+    line-height: 1.6;
+    padding: 10px;
+    display: flex;
+    flex-direction: column; /* ⚠️ 关键：让文字和选项上下排列，不再并排 */
+    justify-content: flex-start; 
+    align-items: flex-start; /* 文字靠左对齐 */
+    gap: 7px; /* 文字和选项之间的间距 */
+    width: auto;
+    margin-left: 20px;
+}
+
+#dialogue-text {
+    font-family: 'Pixelify Sans', 'Courier New', monospace; 
+    font-size: 1.3rem;      
+    line-height: 2;         
+    color: #ffffff;          
+    letter-spacing: 2px;     
+    text-shadow: 2px 2px #000;
+    cursor: pointer; /* 添加指针表示可点击 */
+}
+
+/* 按钮文字 */
+.search-btns, .rpg-option {
+    font-family: 'Pixelify Sans', 'Courier New', monospace !important;
+    letter-spacing: 1px;
+}
+
+/* 按钮样式 */
+#options-overlay {
+
+    left: 15px;
+    opacity: 0;
+    pointer-events: none;
+    width: 100%;
+    max-width: 100%;
+}
+
+.rpg-option {
+    background: transparent;
+    border: none !important;
+    color: var(--gold);
+    padding: 6px 10px;
+    text-align: left;
+    cursor: pointer;
+    position: relative;
+    font-family: 'Pixelify Sans', 'Courier New', monospace; /* 强制像素字体 */
+    font-size: 1.2rem;
+    line-height: 1.45;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    transition: none; /* 像素风不需要平滑过渡 */
+}
+
+/* 按钮指针 */
+.rpg-option::before {
+    content: "▷"; /* 需要替换图片 */
+    position: absolute;
+    left: -2%;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffffff; /* 指针使用高亮白色或金色 */
+    opacity: 0;     /* 默认隐藏 */
+    visibility: hidden;
+}
+
+.rpg-option:hover {
+    color: #ffffff !important;
+    background: transparent !important;
+}
+
+.rpg-option:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 按钮动画-淡入 */
+.show-options {
+    animation: simpleFadeIn 0.8s ease forwards !important; /* 使用你定义的纯淡入动画 */
+    opacity: 1 !important;
+    pointer-events: auto !important; /* 显示后恢复点击 */
+}
+
+@keyframes simpleFadeIn {
+    from {opacity: 0; }
+    to {opacity: 1; }
+}
+
+
+/* 对话框 */
+#dialogue-area {
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    height: 270px; 
+    width: 90%;           
+    max-width: 900px;     
+    margin: 0 auto 20px auto;
+    background: var(--ui-bg);
+    border: 6px solid #484c67; /* 深紫边框线 */
+    border-radius: 1ch;
+    padding: 10px 10px 0 10px; /* 留出顶部边框 */
+}
+
+.dialogue-wrapper {
+    display: flex;
+    flex-direction: row;
+    /* ⚠️ 核心修改：让头像和文字盒都从顶部对齐，而不是在中间对齐 */
+    align-items: flex-start; 
+    
+    width: 100%;
+    height: 100%;
+    padding-top: 15px; /* 让文字和头像离对话框顶边有一点点距离 */
+}
+
+/* 头像1 */
+#portrait-container {
+    display: none; /* ⚠️ 改为默认隐藏 */
+    height: 80%; 
+    aspect-ratio: 1 / 1;
+    margin-left: 20px; 
+    margin-right: 30px;
+    margin-top: 15px;
+
+    align-items: center; 
+}
+
+.is-giving-card #portrait-container {
+    display: flex;
+}
+
+#portrait-img {
+    display: none; /* ⚠️ 改为默认隐藏 */
+    width: 120%; /* 头像图片占据黑框的 90%，留出边缘空间 */
+    height: 120%;
+    
+    background-image: url('image/头像1.png'); /* 将 'assets/portrait.png' 换成你文件的实际路径 */
+    
+    background-size: contain; /* 图片在 div 内完整展示 */
+    background-repeat: no-repeat;
+    background-position: center;
+    
+}
+
+/* ⚠️ 只有在 body 有这个类时才显示 */
+.is-giving-card #portrait-img {
+    display: flex;
+}
+
+/* 背景+立绘1 */
+#game-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#scene-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #000;
+    
+    background-image: url('image/立绘1.png'); 
+    
+    background-size: auto 100vh; 
+    background-position: center calc(100% + 30vh); 
+    
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+
+    overflow: visible; 
+    position: relative; 
+    z-index: 1;
+}
+
+body.is-giving-card #scene-area {
+    background-image: none !important;
+}
+
+/* 塔罗卡牌牌面-需要修改-增加背景图 */
+#card-stage { 
+    perspective: 800px; 
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('tarot/stage_pattern.png');
+    background-repeat: repeat;   
+    background-position: center;
+}
+
+.tarot-card {
+    width: 210px;
+    height: 450px; 
+    position: relative;
+    transform-style: preserve-3d; 
+    transition: transform 0.5s ease-in-out; 
+}
+.tarot-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; 
+    
+    box-sizing: border-box; 
+    overflow: hidden;
+}
+
+.card-front { 
+    background-color: #101935; 
+    padding: 0;
+}
+
+.card-image-full {
+    background-size: cover;      
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: crisp-edges;
+}
+
+/* 塔罗卡牌-酒配方文字 */
+.card-back { 
+    transform: rotateY(180deg);
+    background: #101935;
+    border-top: 3px solid var(--gold);   
+    border-bottom: 3px solid var(--gold);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;    
+    padding: 20px;           
+    text-align: center;
+}
+
+#recipe-title { 
+    font-size: 1.2rem;
+    text-align: center;
+    text-justify: center;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    color: #fff;
+    text-shadow: 2px 2px #000;
+}
+
+#recipe-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#recipe-content ul {
+    padding-left: 15px;
+    margin: 4px 0;
+}
+
+.tap-hint {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin-top: 8px;
+}
+
+
+.drink-art-box {
+    width: 120px;          /* 根据你的卡牌宽度调整 */
+    height: 180px;
+    margin-bottom: 40px;   /* 距离标题的间距 */
+    margin-bottom: 10px;
+    
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    border: 2px solid rgba(238, 192, 97, 0.3); 
+}
+
+
+
+
+
+
+
+
+
+
+/* 仿参考图的不规则标题边框 */
+#speaker-name {
+    position: absolute; top: -12px; left: 10px;
+    background: #111; color: var(--gold);
+    padding: 2px 10px; font-weight: bold; font-size: 0.95rem;
+    border: 2px solid #000;
+    /* 增加不完美的圆角或多边形感，参考图的感觉 */
+    border-radius: 4px; 
+}
+
+/* --- 搜索界面 (调整为质朴的像素风格) --- */
+#search-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); z-index: 100;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.search-container {
+    width: 80%; max-width: 380px; background: #000; padding: 20px;
+    border: 4px solid var(--purple-trim);
+    box-shadow: -4px 4px 0 0 var(--gold); /* 使用金棕色阴影强调 */
+    text-align: center;
+}
+
+#search-input {
+    width: 100%; padding: 8px; background: #0a0a0b; 
+    border: 2px solid var(--purple-trim);
+    color: var(--gold); margin-bottom: 12px; box-sizing: border-box;
+    font-family: monospace; font-size: 0.9rem;
+}
+
+.search-btns { display: flex; gap: 6px; justify-content: center; }
+.search-btns button {
+    background: var(--ui-bg); border: 2px solid var(--gold); color: var(--gold);
+    padding: 6px 14px; cursor: pointer; 
+    font-family: "Pixelify Sans", sans-serif !important;;
+    transition: none;
+    box-shadow: inset 0 0 0 1px #000;
+}
+.search-btns button:hover { background: var(--gold); color: #000; }
+
+#search-results { max-height: 180px; overflow-y: auto; margin-top: 12px; text-align: left; }
+.search-item { padding: 6px; border-bottom: 2px solid #222; cursor: pointer; color: #ccc; font-size: 0.85rem;}
+.search-item:hover { color: var(--gold); background: #111; }
+
+/* --- API 结果界面样式 --- */
+#api-result-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #000; z-index: 10000; display: flex;
+    justify-content: center; align-items: center; font-family: 'Pixelify Sans', sans-serif;
+}
+.api-card {
+    width: 85%; max-width: 400px; padding: 25px; text-align: center;
+    background: #0d0d0f; border: 4px solid #4dabf7; /* 蓝色边框 */
+    box-shadow: 0 0 20px rgba(77, 171, 247, 0.4); border-radius: 8px; color: #fff;
+}
+.api-img {
+    width: 180px; height: 180px; object-fit: cover;
+    border: 2px solid #4dabf7; margin-bottom: 15px;
+}
+.api-title { color: #4dabf7; font-size: 1.8rem; margin: 10px 0; }
+.api-recipe {
+    text-align: left; background: rgba(77, 171, 247, 0.1);
+    padding: 15px; border-left: 4px solid #4dabf7;
+    font-size: 0.9rem; max-height: 150px; overflow-y: auto; margin: 15px 0;
+}
+.api-close-btn {
+    background: transparent; border: 1px solid #4dabf7; color: #4dabf7;
+    padding: 8px 20px; cursor: pointer; margin-top: 10px;
+}
+.api-close-btn:hover { background: #4dabf7; color: #000; }
+
+.hidden { display: none !important; }
