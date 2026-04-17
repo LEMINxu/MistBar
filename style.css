@@ -135,6 +135,60 @@ body, html {
     padding: 10px 10px 0 10px; /* 留出顶部边框 */
 }
 
+/* 手机 / 竖屏 adaptive */
+@media (max-height: 600px), (max-width: 600px) {
+    #dialogue-area {
+        height: 180px;
+        margin: 0 auto 10px auto;
+        padding: 8px 8px 0 8px;
+    }
+    
+    #dialogue-box {
+        padding: 8px;
+        gap: 4px;
+        margin-left: 12px;
+    }
+    
+    #dialogue-text {
+        font-size: 1rem;
+        line-height: 1.5;
+        letter-spacing: 1px;
+    }
+    
+    .rpg-option {
+        font-size: 0.95rem;
+        padding: 4px 8px;
+        line-height: 1.2;
+    }
+}
+
+/* 小屏幕手机 */
+@media (max-height: 500px) {
+    #dialogue-area {
+        height: 140px;
+        margin: 0 auto 8px auto;
+        padding: 6px 6px 0 6px;
+    }
+    
+    #dialogue-box {
+        padding: 6px;
+        gap: 3px;
+        margin-left: 8px;
+    }
+    
+    #dialogue-text {
+        font-size: 0.85rem;
+        line-height: 1.3;
+        letter-spacing: 0.5px;
+    }
+    
+    .rpg-option {
+        font-size: 0.8rem;
+        padding: 3px 6px;
+        line-height: 1.1;
+    }
+}
+
 .dialogue-wrapper {
     display: flex;
     flex-direction: row;

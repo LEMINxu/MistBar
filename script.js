@@ -720,27 +720,37 @@ async function getRandomDrink() {
 
 // --- 屏幕方向管理 ---
 function handleScreenOrientation() {
-    // 尝试锁定屏幕方向为横屏
-    const lockLandscape = () => {
-        if (screen.orientation && screen.orientation.lock) {
-            // 现代浏览器 API
-            screen.orientation.lock('landscape').catch(() => {
-                console.log('无法锁定屏幕方向');
-            });
-        } else if (screen.lockOrientation) {
-            // 旧版 API
-            screen.lockOrientation('landscape');
-        } else if (screen.webkitLockOrientation) {
-            // webkit 前缀
-            screen.webkitLockOrientation('landscape');
+    const portraitWarning = document.getElementById('portrait-warning');
+    const gameContainer = document.getElementById('game-container');
+    
+    // 检查当前方向
+    const checkOrientation = () => {
+        const isPortrait = window.innerHeight > window.innerWidth;
+        
+        if (isPortrait) {
+            // 竖屏 - 显示提示
+            portraitWarning.style.display = 'flex';
+            gameContainer.style.display = 'none';
+        } else {
+            // 横屏 - 显示游戏
+            portraitWarning.style.display = 'none';
+            gameContainer.style.display = 'flex';
         }
     };
     
-    // 初始尝试锁定
-    lockLandscape();
+    // 初始检查
+    checkOrientation();
     
-    // 监听方向改变，持续尝试锁定
-    window.addEventListener('orientationchange', lockLandscape);
+    // 监听方向改变
+    window.addEventListener('orientationchange', checkOrientation);
+    window.addEventListener('resize', checkOrientation);
+    
+    // 尝试锁定屏幕方向（仅 iOS Safari 和某些 Android 浏览器支持）
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('landscape').catch(() => {
+            console.log('无法锁定屏幕方向，请手动调整');
+        });
+    }
 }
 
 // 页面加载时初始化屏幕方向

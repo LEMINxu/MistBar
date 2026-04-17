@@ -10,16 +10,45 @@
     <title>MistBar Pixel RPG</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* iPad/手机竖屏时隐藏游戏 */
+        /* 竖屏提示 */
+        #portrait-warning {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #fff;
+            font-size: 1.5rem;
+            font-family: 'Pixelify Sans', sans-serif;
+            text-align: center;
+        }
+        
+        /* iPad/手机竖屏时显示提示 */
         @media (max-aspect-ratio: 1/1) {
+            #portrait-warning {
+                display: flex;
+            }
             #game-container {
-                display: none !important;
+                display: none;
             }
         }
     </style>
 </head>
 
 <body>
+    <!-- 竖屏提示 -->
+    <div id="portrait-warning">
+        <div style="margin-bottom: 30px; font-size: 3rem;">📱</div>
+        <div>Please rotate your device</div>
+        <div style="font-size: 1rem; margin-top: 20px; opacity: 0.7;">to landscape mode</div>
+    </div>
+    
     <div id="game-container">
         <div id="scene-area">
             <div id="quiz-image-display" class="hidden"></div>
