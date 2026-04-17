@@ -717,3 +717,31 @@ async function getRandomDrink() {
         console.error("❌ 运行时出错:", error);
     }
 }
+
+// --- 屏幕方向管理 ---
+function handleScreenOrientation() {
+    // 尝试锁定屏幕方向为横屏
+    const lockLandscape = () => {
+        if (screen.orientation && screen.orientation.lock) {
+            // 现代浏览器 API
+            screen.orientation.lock('landscape').catch(() => {
+                console.log('无法锁定屏幕方向');
+            });
+        } else if (screen.lockOrientation) {
+            // 旧版 API
+            screen.lockOrientation('landscape');
+        } else if (screen.webkitLockOrientation) {
+            // webkit 前缀
+            screen.webkitLockOrientation('landscape');
+        }
+    };
+    
+    // 初始尝试锁定
+    lockLandscape();
+    
+    // 监听方向改变，持续尝试锁定
+    window.addEventListener('orientationchange', lockLandscape);
+}
+
+// 页面加载时初始化屏幕方向
+document.addEventListener('DOMContentLoaded', handleScreenOrientation);
