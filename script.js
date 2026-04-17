@@ -1,68 +1,117 @@
 // 1. 原型数据定义
 const archetypes = {
-    'Hermit': {
-        name: "Hermit",
-        quote: "“即便在最深的黑暗中，内省之光也能照亮前行的路。”",
-        recipe: "• 洋甘菊金酒 45ml<br>• 蜂蜜糖浆 15ml<br>• 低酒精度，草本调" },
-    
-    'Emperor': {
-        name: "Emperor",
-        quote: "“秩序并非枷锁，而是建立伟业的基石。”",
-        recipe: "• 伦敦干金酒 60ml<br>• 干苦艾酒 10ml<br>• 橄榄，极致冷静" },
+    'Fool': {
+        name: "Fool",
+        quote: "“未知的旅程本身就是奖励，跳向那片虚空吧。”",
+        recipe: "• 白朗姆酒 45ml<br>• 新鲜薄荷与青柠<br>• 自由的清爽感" },
 
     'Magician': {
         name: "Magician",
         quote: "“万物皆由意志塑造，你手中握着改变现实的权杖。”",
         recipe: "• 龙舌兰 45ml<br>• 蓝橙利口酒 15ml<br>• 充满创造力的色彩" },
 
-    'Fool': {
-        name: "Fool",
-        quote: "“未知的旅程本身就是奖励，跳向那片虚空吧。”",
-        recipe: "• 白朗姆酒 45ml<br>• 新鲜薄荷与青柠<br>• 自由的清爽感" },
-    'Sun': {
-        name: "Sun",
-        quote: "“真正的光芒来自内心，照亮你前行的道路。”",
-        recipe: "• 金朗姆酒 45ml<br>• 菠萝汁 60ml<br>• 阳光般的热带风味" },
+    'High Priestess': {
+        name: "High Priestess",
+        quote: "“在静默中守候，智慧在无声处显现。”",
+        recipe: "• 清酒基底<br>• 樱花利口酒<br>• 优雅的东方调" },
     
-    'Death': {
-        name: "Death",
-        quote: "“没有彻底的终结，就没有纯粹的诞生。”",
-        recipe: "• 伏特加 30ml<br>• 咖啡利口酒 30ml<br>• 纯黑，重生的味道" },
+    'Empress': {
+        name: "Empress",
+        quote: "“丰饶与创造力的象征，掌握生命的艺术。”",
+        recipe: "• 桃子利口酒 45ml<br>• 香草伏特加 15ml<br>• 丰富而圆润的口感" },
 
-    'Star': {
-        name: "Star",
-        quote: "“在绝望的荒野里，抬头总能看见永恒的指引。”",
-        recipe: "• 蝶豆花浸渍金酒<br>• 汤力水<br>• 星空般的紫色梦境" },
+    'Emperor': {
+        name: "Emperor",
+        quote: "“秩序并非枷锁，而是建立伟业的基石。”",
+        recipe: "• 伦敦干金酒 60ml<br>• 干苦艾酒 10ml<br>• 橄榄，极致冷静" },
+
+    'Hierophant': {
+        name: "Hierophant",
+        quote: "“传统与智慧的守护者，引导你走向内在的真理。”",
+        recipe: "• 伦敦干金酒 60ml<br>• 干苦艾酒 10ml<br>• 橄榄，极致冷静" },
 
     'Lovers': {
         name: "Lovers",
         quote: "“选择意味着放弃，但爱让这种牺牲变得神圣。”",
         recipe: "• 龙舌兰 45ml<br>• 玫瑰糖浆 10ml<br>• 甜美而危险的平衡" },
 
-    'World': {
-        name: "World",
-        quote: "“圆满并非终点，而是与宇宙节奏合一的瞬间。”",
-        recipe: "• 五种基酒混合<br>• 可乐与柠檬汁<br>• 复杂的和谐" },
-
-    'Moon': {
-        name: "Moon",
-        quote: "“真实往往隐藏在阴影之后，听从你的直觉。”",
-        recipe: "• 冰镇白葡萄酒<br>• 苦艾酒润杯<br>• 朦胧的迷雾感" },
+    'Chariot': {
+        name: "Chariot",
+        quote: "“意志与决心的象征，驾驭命运的力量。”",
+        recipe: "• 龙舌兰 45ml<br>• 玫瑰糖浆 10ml<br>• 甜美而危险的平衡" },
 
     'Strength': {
         name: "Strength",
         quote: "“真正的勇气不是没有恐惧，而是温柔地驯服它。”",
         recipe: "• 波本威士忌 60ml<br>• 橙皮苦精<br>• 坚韧的基调" },
 
-    'High Priestess': {
-        name: "High Priestess",
-        quote: "“在静默中守候，智慧在无声处显现。”",
-        recipe: "• 清酒基底<br>• 樱花利口酒<br>• 优雅的东方调" },
+    'Hermit': {
+        name: "Hermit",
+        quote: "“即便在最深的黑暗中，内省之光也能照亮前行的路。”",
+        recipe: "• 洋甘菊金酒 45ml<br>• 蜂蜜糖浆 15ml<br>• 低酒精度，草本调" },
+
+    'Wheel of Fortune': {
+        name: "Wheel of Fortune",
+        quote: "“命运的轮盘不断旋转，掌握它需要智慧与勇气。”",
+        recipe: "• 洋甘菊金酒 45ml<br>• 蜂蜜糖浆 15ml<br>• 低酒精度，草本调" },
 
     'Justice': {
         name: "Justice",
         quote: "“因果的丝线编织成网，没有任何决定是孤立的。”",
-        recipe: "• 杜松子酒 45ml<br>• 简单的平衡比例" }
+        recipe: "• 杜松子酒 45ml<br>• 简单的平衡比例" },
+
+    'Hanged Man': {
+        name: "Hanged Man",
+        quote: "“因果的丝线编织成网，没有任何决定是孤立的。”",
+        recipe: "• 杜松子酒 45ml<br>• 简单的平衡比例" },
+
+    'Death': {
+        name: "Death",
+        quote: "“没有彻底的终结，就没有纯粹的诞生。”",
+        recipe: "• 伏特加 30ml<br>• 咖啡利口酒 30ml<br>• 纯黑，重生的味道" },
+
+    'Temperance': {
+        name: "Temperance",
+        quote: "“平衡与和谐的象征，掌握节制的艺术。”",
+        recipe: "• 伏特加 30ml<br>• 咖啡利口酒 30ml<br>• 纯黑，重生的味道" },
+ 
+    'Devil': {
+        name: "Devil",
+        quote: "“诱惑与束缚的象征，面对内心的阴影。”",
+        recipe: "• 朗姆酒 45ml<br>• 黑莓利口酒 15ml<br>• 深沉而复杂的味道" },
+
+    'Tower': {
+        name: "Tower",
+        quote: "“突如其来的变故，打破旧有的秩序。”",
+        recipe: "• 朗姆酒 45ml<br>• 黑莓利口酒 15ml<br>• 深沉而复杂的味道" },
+
+    'Star': {
+        name: "Star",
+        quote: "“在绝望的荒野里，抬头总能看见永恒的指引。”",
+        recipe: "• 蝶豆花浸渍金酒<br>• 汤力水<br>• 星空般的紫色梦境" },
+ 
+    'Moon': {
+        name: "Moon",
+        quote: "“真实往往隐藏在阴影之后，听从你的直觉。”",
+        recipe: "• 冰镇白葡萄酒<br>• 苦艾酒润杯<br>• 朦胧的迷雾感" },
+
+    'Sun': {
+        name: "Sun",
+        quote: "“真正的光芒来自内心，照亮你前行的道路。”",
+        recipe: "• 金朗姆酒 45ml<br>• 菠萝汁 60ml<br>• 阳光般的热带风味" },
+
+    'Judgement': {
+        name: "Judgement",
+        quote: "“审判与觉醒的象征，面对内心的真相。”",
+        recipe: "• 五种基酒混合<br>• 可乐与柠檬汁<br>• 复杂的和谐" },
+
+    'World': {
+        name: "World",
+        quote: "“圆满并非终点，而是与宇宙节奏合一的瞬间。”",
+        recipe: "• 五种基酒混合<br>• 可乐与柠檬汁<br>• 复杂的和谐" },
+
+
+
 };
 
 // 2. 游戏状态变量
@@ -107,49 +156,67 @@ const storyTree = {
     }
 };
 
-// 4. 测试题库
+// 4. Quiz Questions - Immersive Story: Finding Yourself in the Mist
 const quizQuestions = [
-    { text: "Imagine you are standing before a door. What's behind it:", options: [
-        { text: "A. A mirror", tags: ['Emperor', 'Justice', 'Hermit', 'High Priestess'] },
-        { text: "B. An endless path", tags: ['Magician', 'Moon', 'Star'] },
-        { text: "C. A beam of light", tags: ['Fool', 'Lovers', 'Death'] },
-        { text: "D. A familiar scent", tags: ['Sun', 'World'] }
+    { text: "Mist surrounds you. You step through an ancient door. Behind it:", options: [
+        { text: "A. Mirror reflecting your true self", tags: ['High Priestess', 'Justice'] },
+        { text: "B. Endless winding path", tags: ['Fool', 'Magician'] },
+        { text: "C. Blooming garden", tags: ['Empress', 'Lovers'] },
+        { text: "D. Golden palace with order", tags: ['Emperor', 'Hierophant'] }
     ]},
-    { text: "Imagine you are standing by a lake, and a mist is rising from the water. A person is standing in the mist, and they are:", options: [
-        { text: "A. Thinking", tags: ['Hermit', 'High Priestess'] },
-        { text: "B. Planning", tags: ['Emperor', 'Magician'] },
-        { text: "C. Hesitating", tags: ['Death', 'Moon'] },
-        { text: "D. Waiting", tags: ['Lovers', 'World'] }
+    { text: "A figure emerges from the mist. It is:", options: [
+        { text: "A. Ancient voice chanting", tags: ['Hierophant', 'High Priestess'] },
+        { text: "B. Hand inviting you to dance", tags: ['Lovers', 'Chariot'] },
+        { text: "C. Rider on a fierce horse", tags: ['Chariot', 'Emperor'] },
+        { text: "D. Gentle, sheltering embrace", tags: ['Strength', 'Hermit'] }
     ]},
-    { text: "The person suddenly turns around. You think this moment is:", options: [
-        { text: "A. An invitation", tags: ['Lovers', 'Star'] },
-        { text: "B. A warning", tags: ['Emperor', 'Justice'] },
-        { text: "C. A coincidence", tags: ['Fool', 'Moon'] },
-        { text: "D. An ending", tags: ['Death', 'World'] }
+    { text: "You remember the last time you were alone. You were:", options: [
+        { text: "A. Lighting a lamp in darkness", tags: ['Hermit', 'Justice'] },
+        { text: "B. Facing fortune's wheel, powerless", tags: ['Wheel of Fortune', 'Death'] },
+        { text: "C. Between opposing forces, seeking balance", tags: ['Justice', 'Temperance'] },
+        { text: "D. Suspended upside down, waiting", tags: ['Hanged Man', 'Moon'] }
     ]},
-    { text: "The sky begins to change, and you believe this is:", options: [
-        { text: "A. A new beginning", tags: ['Fool', 'Sun'] },
-        { text: "B. A certain ending", tags: ['Death', 'World'] },
-        { text: "C. A cycle", tags: ['Moon'] },
-        { text: "D. A balance", tags: ['Strength', 'Justice'] }
+    { text: "An unavoidable truth: life must end. You feel:", options: [
+        { text: "A. Natural transformation; I will rise", tags: ['Death', 'Temperance'] },
+        { text: "B. I've learned to let go, found peace", tags: ['Temperance', 'Hermit'] },
+        { text: "C. My deepest desires awaken", tags: ['Devil', 'Tower'] },
+        { text: "D. Old self must shatter to rebuild", tags: ['Tower', 'Fool'] }
     ]},
-    { text: "Petals are drifting in the air, and this breeze signifies:", options: [
-        { text: "A. Guidance", tags: ['High Priestess', 'Star'] },
-        { text: "B. Opportunity", tags: ['Magician'] },
-        { text: "C. Chaos", tags: ['Moon'] },
-        { text: "D. Liberation", tags: ['Strength', 'World'] }
+    { text: "The sky tears open. Light pierces the mist. It is:", options: [
+        { text: "A. An eternal guiding star", tags: ['Star', 'Judgement'] },
+        { text: "B. Moonlight woven with shadows", tags: ['Moon', 'Devil'] },
+        { text: "C. A dazzling golden sun", tags: ['Sun'] },
+        { text: "D. The awakening of cosmic consciousness", tags: ['Judgement', 'World'] }
     ]},
-    { text: "Petals fall into your palm, and this represents:", options: [
-        { text: "A. New Life", tags: ['Sun'] },
-        { text: "B. Key", tags: ['High Priestess'] },
-        { text: "C. Promise", tags: ['Lovers', 'Strength'] },
-        { text: "D. Fate", tags: ['Moon', 'Death'] }
+    { text: "Two paths diverge. One leads to:", options: [
+        { text: "A. Complete self, perfect harmony", tags: ['World', 'Temperance'] },
+        { text: "B. Infinite possibilities, creative power", tags: ['Magician', 'Fool'] },
+        { text: "C. A temple holding all answers", tags: ['High Priestess', 'Hierophant'] },
+        { text: "D. Life's source, where all awakens", tags: ['Empress', 'Wheel of Fortune'] }
     ]},
-    { text: "The door appears again, and you decide:", options: [
-        { text: "A. Leave this place", tags: ['World', 'Death'] },
-        { text: "B. Continue exploring", tags: ['High Priestess', 'Moon'] },
-        { text: "C. Doubt its authenticity", tags: ['Justice', 'Emperor'] },
-        { text: "D. Smash the door", tags: ['Fool', 'Strength'] }
+    { text: "A storm arrives suddenly. Your choice:", options: [
+        { text: "A. Hold my truth, whatever the cost", tags: ['Emperor', 'Justice'] },
+        { text: "B. Keep faith, resist with strength", tags: ['Hierophant', 'Strength'] },
+        { text: "C. Reflect, follow my heart", tags: ['Lovers', 'Hanged Man'] },
+        { text: "D. Ride the waves with courage", tags: ['Chariot', 'Magician'] }
+    ]},
+    { text: "The storm passes. Night falls. You feel:", options: [
+        { text: "A. Long-dormant courage awakening", tags: ['Strength', 'Fool'] },
+        { text: "B. Ancient wisdom from deep within", tags: ['Hermit', 'High Priestess'] },
+        { text: "C. Fortune's wheel turning silently", tags: ['Wheel of Fortune', 'Judgement'] },
+        { text: "D. Hidden truths shining brightly", tags: ['Justice', 'Devil'] }
+    ]},
+    { text: "Through darkness and light, the secret emerges:", options: [
+        { text: "A. Let go gracefully; freedom comes", tags: ['Hanged Man', 'Death'] },
+        { text: "B. Find harmony in contradictions", tags: ['Temperance', 'Lovers'] },
+        { text: "C. Embrace desire and shadow", tags: ['Devil', 'Empress'] },
+        { text: "D. Break boundaries, be reborn", tags: ['Tower', 'World'] }
+    ]},
+    { text: "The mist clears. The ancient door reappears. You will:", options: [
+        { text: "A. Open it, welcome the unknown", tags: ['Star', 'Strength'] },
+        { text: "B. Ignore it, it's just a dream", tags: ['Moon', 'Hermit'] },
+        { text: "C. Turn away, retrace your steps", tags: ['Sun'] },
+        { text: "D. Smash the door", tags: ['Judgement', 'Chariot'] }
     ]}
 ];
 
@@ -229,6 +296,12 @@ function renderQuestion() {
     const q = quizQuestions[currentStep];
     // 强制触发 UI 模式更新
     updateInterfaceMode('quiz');
+    
+    // 显示对应题目的插图
+    const quizImageDisplay = document.getElementById('quiz-image-display');
+    quizImageDisplay.classList.remove('hidden');
+    const questionNumber = currentStep + 1;
+    quizImageDisplay.style.backgroundImage = `url('picture/Q${questionNumber}.png')`;
 
     const options = q.options.map(opt => ({
         text: opt.text,
@@ -239,12 +312,14 @@ function renderQuestion() {
             renderQuestion();
         }
     }));
+    
     processDialogue(q.text, options, 'grid');
 }
 
 function updateInterfaceMode(key, node = {}) {
     const body = document.body;
     const cardStage = document.getElementById('card-stage');
+    const quizImageDisplay = document.getElementById('quiz-image-display');
     
     // 判定：只要在测试中 (currentStep >= 0) 或者是结果页
     const isSpecialMode = (key === 'quiz' || key === 'result' || currentStep >= 0 || node.showCard);
@@ -256,6 +331,7 @@ function updateInterfaceMode(key, node = {}) {
         // 2. 只有在真正出结果时才显示中间的卡牌区域
         if (currentStep >= quizQuestions.length || key === 'result' || node.showCard) {
             cardStage.classList.remove('hidden');
+            quizImageDisplay.classList.add('hidden');
         } else {
             cardStage.classList.add('hidden');
         }
@@ -263,6 +339,7 @@ function updateInterfaceMode(key, node = {}) {
         // 初始状态/主菜单：移除类名 -> CSS 显示立绘、隐藏头像
         body.classList.remove('is-giving-card');
         cardStage.classList.add('hidden');
+        quizImageDisplay.classList.add('hidden');
     }
 }
 
@@ -393,7 +470,7 @@ function showFinalResult(isRandom = false) {
         if (cand.length > 0) shadow = cand[0][0];
     }
 
-    displayCard(first, "主人格");
+    displayCard(first, "主人格", null, null, true);
     
     const overlay = document.getElementById('options-overlay');
     overlay.innerHTML = '';
@@ -407,7 +484,7 @@ function showFinalResult(isRandom = false) {
         btn.className = 'rpg-option';
         btn.innerText = "Show your Shadow side.";
         btn.onclick = () => {
-            displayCard(shadow, "阴影人格");
+            displayCard(shadow, "阴影人格", null, null, true);
             typeWriter("“在你灵魂被忽视的角落，存放着你最陌生的自我...”");
         };
         overlay.appendChild(btn);
@@ -423,7 +500,7 @@ function showFinalResult(isRandom = false) {
     overlay.appendChild(reBtn);
 }
 
-function displayCard(key, label, customData = null, imageUrl = null) {
+function displayCard(key, label, customData = null, imageUrl = null, allowFlip = false) {
     currentResultKey = key;
     const data = customData || archetypes[key] || archetypes['Fool'];
     const frontEl = document.getElementById('card-front-display');
@@ -434,7 +511,10 @@ function displayCard(key, label, customData = null, imageUrl = null) {
     document.getElementById('recipe-content').innerHTML = data.recipe;
     
     document.getElementById('card-stage').classList.remove('hidden');
-    document.getElementById('tarot-card').classList.add('flipped');
+    
+    // 初始显示卡面（不翻转）
+    const card = document.getElementById('tarot-card');
+    card.classList.remove('flipped');
     
     typeWriter(`“这就是属于你的：【${data.name}】。Click the tarot card to see your special drink.”`);
 //这里需要增加每一个卡牌的剧情
@@ -444,6 +524,15 @@ function displayCard(key, label, customData = null, imageUrl = null) {
         drinkImgEl.style.backgroundImage = `url(${imageUrl})`;
     } else {
         drinkImgEl.style.backgroundImage = `url('drink/${key.toLowerCase()}.png')`;
+    }
+    
+    // 只有测试结果才可以翻转
+    if (allowFlip) {
+        card.style.cursor = 'pointer';
+        card.onclick = flipCard;
+    } else {
+        card.style.cursor = 'default';
+        card.onclick = null;
     }
 }
 

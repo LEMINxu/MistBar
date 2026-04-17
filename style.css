@@ -93,7 +93,7 @@ body, html {
     left: -2%;
     top: 50%;
     transform: translateY(-50%);
-    color: #ffffff; /* 指针使用高亮白色或金色 */
+    color: hsl(0, 0%, 100%); /* 指针使用高亮白色或金色 */
     opacity: 0;     /* 默认隐藏 */
     visibility: hidden;
 }
@@ -120,17 +120,16 @@ body, html {
     to {opacity: 1; }
 }
 
-
 /* 对话框 */
 #dialogue-area {
     display: flex;
     justify-content: flex-start; 
     align-items: center;
     height: 270px; 
-    width: 90%;           
-    max-width: 900px;     
+    width: 95%;           
+    max-width: 1100px;     
     margin: 0 auto 20px auto;
-    background: var(--ui-bg);
+    background: rgba(72, 76, 103, 0.3);
     border: 6px solid #484c67; /* 深紫边框线 */
     border-radius: 1ch;
     padding: 10px 10px 0 10px; /* 留出顶部边框 */
@@ -168,7 +167,7 @@ body, html {
     width: 120%; /* 头像图片占据黑框的 90%，留出边缘空间 */
     height: 120%;
     
-    background-image: url('image/头像1.png'); /* 将 'assets/portrait.png' 换成你文件的实际路径 */
+    background-image: url('image/头像-普.png'); /* 将 'assets/portrait.png' 换成你文件的实际路径 */
     
     background-size: contain; /* 图片在 div 内完整展示 */
     background-repeat: no-repeat;
@@ -193,13 +192,13 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 80px 20px 20px;
     background-color: #000;
     
-    background-image: url('image/立绘1.png'); 
+    background-image: url('image/立绘-普.png'); 
     
     background-size: auto 100vh; 
-    background-position: center calc(100% + 30vh); 
+    background-position: center calc(100% + 35vh); 
     
     background-repeat: no-repeat;
     image-rendering: pixelated;
@@ -211,6 +210,16 @@ body, html {
 
 body.is-giving-card #scene-area {
     background-image: none !important;
+}
+
+/* 题目插图容器 */
+#quiz-image-display {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: crisp-edges;
 }
 
 /* 塔罗卡牌牌面-需要修改-增加背景图 */
