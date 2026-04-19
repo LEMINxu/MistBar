@@ -297,23 +297,34 @@ function renderQuestion() {
     // 强制触发 UI 模式更新
     updateInterfaceMode('quiz');
     
-    // 显示对应题目的插图
-    const quizImageDisplay = document.getElementById('quiz-image-display');
-    quizImageDisplay.classList.remove('hidden');
-    const questionNumber = currentStep + 1;
-    quizImageDisplay.style.backgroundImage = `url('picture/Q${questionNumber}.png')`;
-
+    // 先清空 back 按钮
+    document.getElementById('back-button-area').innerHTML = '';
+    
+    // 将 quiz 选项转换为 processDialogue 所需的格式
     const options = q.options.map(opt => ({
         text: opt.text,
         action: () => {
-            historyStack.push(JSON.parse(JSON.stringify(weights)));
-            opt.tags.forEach(t => { if(weights[t] !== undefined) weights[t]++; });
-            currentStep++; 
+            historyStack.push({...weights});
+            opt.tags.forEach(t => weights[t] = (weights[t] || 0) + 1);
+            currentStep++;
             renderQuestion();
         }
     }));
     
-    processDialogue(q.text, options, 'grid');
+    processDialogue(q.text, options, 'column', () => {
+        // 选项出现后再显示 back 按钮
+        if (currentStep > 0) {
+            const backButtonArea = document.getElementById('back-button-area');
+            backButtonArea.innerHTML = '<button onclick="goBackToPreviousQuestion()">[ Back ]</button>';
+        }
+    });
+}
+
+function goBackToPreviousQuestion() {
+    if (historyStack.length === 0) return;
+    weights = historyStack.pop();
+    currentStep--;
+    renderQuestion();
 }
 
 function updateInterfaceMode(key, node = {}) {
@@ -343,22 +354,18 @@ function updateInterfaceMode(key, node = {}) {
     }
 }
 
-function processDialogue(text, options, layout = 'column') {
+function processDialogue(text, options, layout = 'column', onOptionsShown = null) {
     const overlay = document.getElementById('options-overlay');
     overlay.classList.remove('show-options');
     overlay.style.opacity = "0"; 
     overlay.innerHTML = '';
     
     // Set layout
-    if (layout === 'grid') {
-        overlay.style.display = 'grid';
-        overlay.style.gridTemplateColumns = 'repeat(2, minmax(0, 1fr))';
-        overlay.style.gap = '8px 10px';
-    } else {
-        overlay.style.display = 'flex';
-        overlay.style.flexDirection = 'column';
-        overlay.style.gap = '4px';
-    }
+    overlay.style.display = 'flex';
+    overlay.style.flexDirection = 'column';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.gap = '20px';
     
     if (Array.isArray(text)) {
         processDialogueSequence(text, options, layout);
@@ -375,6 +382,7 @@ function processDialogue(text, options, layout = 'column') {
         });
         void overlay.offsetWidth; 
         overlay.classList.add('show-options');
+        if (onOptionsShown) onOptionsShown();
     });
 }
 
@@ -384,15 +392,11 @@ function processDialogueSequence(segments, options, layout = 'column') {
     const container = document.getElementById('game-container');
 
     // Set layout
-    if (layout === 'grid') {
-        overlay.style.display = 'grid';
-        overlay.style.gridTemplateColumns = 'repeat(2, minmax(0, 1fr))';
-        overlay.style.gap = '8px 10px';
-    } else {
-        overlay.style.display = 'flex';
-        overlay.style.flexDirection = 'column';
-        overlay.style.gap = '4px';
-    }
+    overlay.style.display = 'flex';
+    overlay.style.flexDirection = 'column';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.gap = '20px';
 
     const showSegment = () => {
         const text = segments[index];
@@ -459,6 +463,10 @@ function resetGameData() {
 function showFinalResult(isRandom = false) {
     // 确保出结果时模式正确
     updateInterfaceMode('result');
+    document.body.classList.add('is-showing-result');
+    
+    // 清除 back 按钮
+    document.getElementById('back-button-area').innerHTML = '';
     
     let sorted = Object.entries(weights).sort((a, b) => b[1] - a[1]);
     const first = isRandom ? 'Fool' : sorted[0][0];
@@ -477,7 +485,9 @@ function showFinalResult(isRandom = false) {
     // 确保结果页选项为纵向排列
     overlay.style.display = 'flex';
     overlay.style.flexDirection = 'column';
-    overlay.style.gap = '4px';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.gap = '20px';
 
     if (shadow) {
         const btn = document.createElement('button');
@@ -494,10 +504,15 @@ function showFinalResult(isRandom = false) {
     reBtn.className = 'rpg-option';
     reBtn.innerText = "Restart";
     reBtn.onclick = () => { 
-        resetGameData(); 
+        resetGameData();
+        document.body.classList.remove('is-showing-result');
         renderStoryNode('main_menu'); 
     };
     overlay.appendChild(reBtn);
+
+    // 显示选项
+    void overlay.offsetWidth;
+    overlay.classList.add('show-options');
 }
 
 function displayCard(key, label, customData = null, imageUrl = null, allowFlip = false) {
